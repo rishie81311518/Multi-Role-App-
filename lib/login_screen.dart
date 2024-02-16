@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,8 +19,18 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: (){
-                print('tap');
+              onTap: () async{
+                SharedPreferences sp = await SharedPreferences.getInstance();
+                sp.setString('name','Rishie');
+                sp.setInt('age', 25);
+                sp.setBool('isLogin', false);
+
+                print(sp.getString('name'));
+                print(sp.getInt('age').toString());
+                print(sp.getString('name'));
+
+                sp.remove('name');
+                print(sp.get('name'));
               },
               child: Container(
                 height: 50,
