@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:multi_role_app/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:multi_role_app/login_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class StudentScreen extends StatefulWidget {
+  const StudentScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<StudentScreen> createState() => _StudentScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-
-  String email = '', age = '';
+class _StudentScreenState extends State<StudentScreen> {
+  String email = '', age = '', type = '';
   @override
   void initState() {
     super.initState();
@@ -22,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     email = sp.getString('email') ?? '';
     age = sp.getString('age') ?? '';
+    type = sp.getString('userType')  ?? '';
     setState(() {
 
     });
@@ -32,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        backgroundColor: Colors.blue,
+        title: Text('Student View'),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -48,11 +49,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(email.toString())
               ],
             ),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('age'),
                 Text(age.toString())
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Type'),
+                Text(type.toString())
               ],
             ),
             SizedBox(height: 40,),
@@ -76,3 +86,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
